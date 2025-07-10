@@ -1,0 +1,15 @@
+# Treat all PowerShell scripts as text and use LF line endings
+*.ps1 text eol=lf
+
+# Force LF for Dockerfile
+Dockerfile text eol=lf
+
+# Treat shell scripts as LF
+*.sh text eol=lf
+
+# Treat batch files and Windows configs as CRLF
+*.cmd text eol=crlf
+*.bat text eol=crlf
+
+# Auto-detect all other text files
+* text=auto
