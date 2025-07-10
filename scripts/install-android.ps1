@@ -30,3 +30,7 @@ cmd /c "$cli --licenses < NUL"
   "platform-tools" `
   "platforms;android-33" `
   "build-tools;33.0.2"
+  "emulator" `
+  "extras;intel;Hardware_Accelerated_Execution_Manager" `
+  "ndk;25.2.9519653"
+
