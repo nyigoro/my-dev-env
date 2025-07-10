@@ -18,13 +18,10 @@ ENV JAVA_HOME="C:\\Program Files\\OpenJDK\\openjdk-17.0.2"
 ENV PATH="$Env:PATH;$Env:JAVA_HOME\\bin"
 
 # Download and set up Android Command Line Tools
-RUN New-Item -ItemType Directory -Path "C:\\android-sdk\\cmdline-tools" -Force; \
-    $url = 'https://dl.google.com/android/repository/commandlinetools-win-9477386_latest.zip'; \
-    $output = 'C:\\cmdline-tools.zip'; \
-    Invoke-WebRequest -Uri $url -OutFile $output; \
-    Expand-Archive -Path $output -DestinationPath 'C:\\android-sdk\\cmdline-tools'; \
-    Move-Item -Path 'C:\\android-sdk\\cmdline-tools\\cmdline-tools' -Destination 'C:\\android-sdk\\cmdline-tools\\latest'; \
-    Remove-Item -Path $output -Force
+RUN curl.exe -L -o C:\\cmdline-tools.zip https://dl.google.com/android/repository/commandlinetools-win-9477386_latest.zip && \
+    powershell -Command "Expand-Archive -Path 'C:\\cmdline-tools.zip' -DestinationPath 'C:\\android-sdk\\cmdline-tools'" && \
+    powershell -Command "Move-Item -Path 'C:\\android-sdk\\cmdline-tools\\cmdline-tools' -Destination 'C:\\android-sdk\\cmdline-tools\\latest'" && \
+    del C:\\cmdline-tools.zip
 
 # Set Android SDK environment
 ENV ANDROID_HOME="C:\\android-sdk"
