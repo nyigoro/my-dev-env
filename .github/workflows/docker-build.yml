@@ -14,9 +14,6 @@ jobs:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
     - name: Build and push Docker image
-      uses: docker/build-push-action@v5
-      with:
-        context: .
-        file: ./Dockerfile
-        push: true
-        tags: nyigoro/windows-android-dev:latest
+      run: |
+        docker build -t nyigoro/windows-android-dev:latest .
+        docker push nyigoro/windows-android-dev:latest
