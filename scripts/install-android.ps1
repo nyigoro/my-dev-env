@@ -25,12 +25,17 @@ $cli = "$toolsPath\latest\bin\sdkmanager.bat"
 # Accept licenses non-interactively
 cmd /c "$cli --licenses < NUL"
 
-# Install core packages
-& $cli --sdk_root=$env:ANDROID_HOME `
-  "platform-tools" `
-  "platforms;android-33" `
-  "build-tools;33.0.2"
-  "emulator" `
-  "extras;intel;Hardware_Accelerated_Execution_Manager" `
+# Install packages (split into array to avoid syntax issues)
+$packages = @(
+  "platform-tools",
+  "platforms;android-33",
+  "build-tools;33.0.2",
+  "emulator",
+  "extras;intel;Hardware_Accelerated_Execution_Manager",
   "ndk;25.2.9519653"
+)
 
+# Run sdkmanager with package list
+foreach ($pkg in $packages) {
+  & $cli --sdk_root=$env:ANDROID_HOME $pkg
+}
