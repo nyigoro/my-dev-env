@@ -1,0 +1,17 @@
+# Start from the existing pushed image
+FROM nyigoro/windows-android-dev:latest
+
+SHELL ["powershell", "-NoProfile", "-ExecutionPolicy", "Bypass", "-Command"]
+
+# Copy addon scripts
+COPY addons/ C:/addons/
+
+# Install additional tools
+RUN C:/addons/install-android-ndk.ps1
+RUN C:/addons/install-gradle.ps1
+RUN C:/addons/install-python-node.ps1
+# Optional: uncomment to include Visual Studio Build Tools
+# RUN C:/addons/install-vsbuildtools.ps1
+
+# Optional startup info
+CMD ["powershell.exe", "C:\\addons\\show-info.ps1"]
